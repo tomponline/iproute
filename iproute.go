@@ -11,7 +11,7 @@ func LocalSrcIP(dstIP string) (string, error) {
 	cmd := exec.Command("ip", "-o", "route", "get", dstIP)
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return "", errors.New(string(stdoutStderr))
+		return "", errors.New(strings.TrimRight(string(stdoutStderr),"\n"))
 	}
 
 	parts := strings.Fields(string(stdoutStderr))
